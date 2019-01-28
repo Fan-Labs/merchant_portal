@@ -81,30 +81,20 @@ export function* logout() {
   });
 }
 
-const { signup_errors } = MESSAGE_KEYS
+const { signup_errors, signup_success } = MESSAGE_KEYS
 export function* signupRequest() {
   yield takeEvery(actions.SIGN_UP, function*(action) {
     const { first_name, last_name, email, password } = action
     yield put(appActions.setLastAPIAction(action))
-    if (fakeApiCall) {
-      yield put({
-        type: actions.LOGIN_SUCCESS,
-        token: 'secret token',
-        profile: 'Profile'
-      });
-
-      yield put(push('/app'))
-
-    } else {
       try {
         yield call(signup, email, password)
+        debugger
+        yield put(messageActions.setMessage(signup_success, signup_success))
         //signupFomoEvent(first_name)
-        yield put(actions.setNewUser(true))
-        yield put(push('/app'))
+
       } catch(error) {
         yield handleError(error, signup_errors)
       }
-    }
   });
 }
 
@@ -169,18 +159,16 @@ const { email_verify_success, email_verify_error } = MESSAGE_KEYS
 export function* verifyMailWatcher() {
   yield takeEvery(actions.VERIFY_MAIL, function*(action) {
     const { token, code="" } = action
-    yield put(appActions.setLastAPIAction(action))
-    if (fakeApiCall) {
-      yield put(push('/'))
-    } else {
-      try {
-        yield put(appActions.startAsync())
-        yield call(verifyMail, token, code)
-        yield put(messageActions.setMessage(email_verify_success, email_verify_success))
-        yield put(appActions.endAsync())
-      } catch(error) {
-          yield handleError(error, email_verify_error)
-      }
+    //yield put(appActions.setLastAPIAction(action))
+    try {
+      yield put(appActions.startAsync())
+      debugger
+      yield call(verifyMail, token, code)
+      debugger
+      yield put(messageActions.setMessage(email_verify_success, email_verify_success))
+      yield put(appActions.endAsync())
+    } catch(error) {
+        yield handleError(error, email_verify_error)
     }
   });
 }
@@ -552,16 +540,14 @@ export function* backupOTPCallWatcher() {
 
 export function* handleError(error, errorMessageKey, shouldTranslate=false) {
   if(!error.response) {
-    yield put(messageActions.setMessage(errorMessageKey, error.message))
+    yield put(messageActions.setMessage(errorMessageKey, "Verification error, please contact us if this persists."))
   }
-  else if(error.response.data.code === 'TWO_FA_REQUIRED') {
-    yield put(actions.setOTPState(true))
+  else if(error.response.data.message ) {
+    yield put(messageActions.setMessage(errorMessageKey, error.response.data.message))
   }
   else if(error.response && error.response.data && error.response.data.errors) {
     yield put(messageActions.setMessage(errorMessageKey, error.response.data.errors.toString()))
-  } else if (shouldTranslate) {
-    yield put(messageActions.setMessage(errorMessageKey, errorMessageKey))
-  }
+  } 
   else if(error.response && error.response.data && error.response.data.message) {
     yield put(messageActions.setMessage(errorMessageKey, error.response.data.message))
   }

@@ -92,6 +92,7 @@ export const MESSAGE_KEYS = {
   c20_verify_fail: 'user.c20VerifyFail',
   login_error: 'page.signInError',
   signup_errors: 'signup_errors',
+  signup_success: 'page.signupVerifySent',
   email_verify_error: 'page.mailVerifyError',
   email_verify_success: 'page.mailVerifySuccess',
   user_update_success: 'settings.updateUserSuccess',

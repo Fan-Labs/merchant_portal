@@ -80,7 +80,7 @@ const PublicRoutes = ({ history, isLoggedIn, locale }) => (
           />
           <Route
             exact
-            path={'/verifymail'}
+            path={'/verify'}
             component={asyncComponent(() =>
               import('./containers/Page/verifyMail'))}
           />

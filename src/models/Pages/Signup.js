@@ -5,12 +5,13 @@ import { MESSAGE_KEYS } from '../../constants'
 import authAction from '../../redux/auth/actions'
 
 const { signup } = authAction
-const { signup_errors } = MESSAGE_KEYS
+const { signup_errors, signup_success } = MESSAGE_KEYS
 
 function mapStateToProps(state, ownprops) {
   return {
     isLoggedIn: state.Auth.get('idToken') !== null ? true : false,
     signupErrorMessages: state.Messages.get(signup_errors),
+    signupSuccessMessage: state.Messages.get(signup_success),
   }
 }
 

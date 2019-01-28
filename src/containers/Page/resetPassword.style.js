@@ -98,6 +98,7 @@ const ResetPasswordStyleWrapper = styled.div`
 
       .isoInputWrapper {
         margin-bottom: 10px;
+        text-align: center;
 
         &:last-child {
           margin-bottom: 0;
@@ -130,6 +131,10 @@ const ResetPasswordStyleWrapper = styled.div`
         .message {
           margin-top: 15px;
           color: red;
+        }
+
+        .successMessage {
+          color: ${palette('success', 0)};
         }
       }
     }

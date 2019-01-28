@@ -18,6 +18,7 @@ const SignUp = ({
   showPasswordMessage,
   showEmailMessage,
   signupErrorMessages,
+  signupSuccessMessage,
   handleUpdate,
   onChange,
   handleSignup,
@@ -25,7 +26,7 @@ const SignUp = ({
   <SignUpStyleWrapper className="isoSignUpPage">
     <div className="isoSignUpContentWrapper">
       <div className="isoSignUpContent">
-        <div className="logo" />
+        {/* <div className="logo" /> */}
         <div className="isoLogoWrapper">
           <Link to="/signin">
             <IntlMessages id="page.signInTitle" />
@@ -78,6 +79,9 @@ const SignUp = ({
               {showPasswordMessage && (<React.Fragment><IntlMessages id="page.resetPassMismatch" /><br/></React.Fragment>)}
               {showEmailMessage && (<React.Fragment><IntlMessages id="page.invalidEmail" /><br/></React.Fragment>)}
               {signupErrorMessages}
+            </div>
+            <div className="message success">
+              {signupSuccessMessage && (<React.Fragment><IntlMessages id="page.signupVerifySent" /><br/></React.Fragment>)}
             </div>
           </div>
           <div className="isoInputWrapper isoCenterComponent isoHelperWrapper">

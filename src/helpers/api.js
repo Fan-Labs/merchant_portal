@@ -2,7 +2,7 @@ import request from 'axios'
 import { setToken, getValidToken } from './utility'
 import moment from 'moment'
 import { siteConfig } from '../config'
-export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'https://sports-backend-staging.herokuapp.com'
+export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3030'
 
 
 export function* makeRequest(method, data, url, headers = {}, params = {}) {
@@ -56,7 +56,8 @@ export function* login(email, password, token, otp="") {
 
 
 export function* verifyMail(token, otp="") {
-  const res = yield makeAuthedRequest('PUT', { token, code: otp }, 'v2/messaging/verify-email');
+  debugger
+  const res = yield makeRequest('POST', { action: 'verifySignupLong', value: token }, 'authManagement');
   return res;
 }
 

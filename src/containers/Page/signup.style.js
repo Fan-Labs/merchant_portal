@@ -90,6 +90,9 @@ const SignUpStyleWrapper = styled.div`
         color: ${palette('error', 0)};
         margin-top: 15px;
       }
+      .success {
+        color: ${palette('success', 0)};
+      }
 
       .isoInputWrapper {
         margin-bottom: 15px;
