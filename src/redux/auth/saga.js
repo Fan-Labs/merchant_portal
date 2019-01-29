@@ -33,29 +33,19 @@ const fakeApiCall = false; // auth0 or express JWT
 const { login_error } = MESSAGE_KEYS
 export function* loginRequest() {
   yield takeEvery('LOGIN_REQUEST', function*(action) {
-    const { user, password, token, code="" } = action;
-    if (fakeApiCall) {
-      yield put({
-        type: actions.LOGIN_SUCCESS,
-        token: 'secret token',
-        profile: 'Profile'
-      });
-
-      yield put(push('/app'))
-
-    } else {
-        try {
-          yield put(appActions.startAsync())
-          yield put(appActions.setLastAPIAction(action))
-          yield call(login, user, password, token, code)
-          yield put(actions.updateUser(getUser()))
-          // const status = yield call(checkKYCStatus)
-          // yield put(actions.setKYCStatus(status.data.verification))
-          yield put(push('/app'))
-        } catch(error) {
-          yield handleError(error, login_error)
-        }
-    }
+    const { user, password, token, code="" } = action; 
+      try {
+        yield put(appActions.startAsync())
+        //yield put(appActions.setLastAPIAction(action))
+        yield call(login, user, password, token, code)
+        debugger
+        yield put(actions.updateUser(getUser()))
+        // const status = yield call(checkKYCStatus)
+        // yield put(actions.setKYCStatus(status.data.verification))
+        yield put(push('/app'))
+      } catch(error) {
+        yield handleError(error, login_error)
+      }
   });
 }
 

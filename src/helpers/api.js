@@ -14,7 +14,8 @@ export function* makeRequest(method, data, url, headers = {}, params = {}) {
   // }
 
   const res = yield request({ url: `${BACKEND_URL}/${url}`, params, method, data, headers });
-  if (res.data.token) setToken(res.data.token)
+  debugger
+  if (res.data.accessToken) setToken(res.data.accessToken)
   return res;
 }
 
@@ -44,11 +45,11 @@ export function* resetPassword(newPassword, token, otp="") {
   return res;
 }
 
-export function* login(email, password, token, otp="") {
+export function* login(email, password, token, otp="", strategy='local') {
   const res = yield makeRequest(
     'POST',
-    { email, password, capture_code: token, code: otp, organization: siteConfig.siteId },
-    'v2/auth/login'
+    { email, password, strategy },
+    'authentication'
   );
   return res;
 }

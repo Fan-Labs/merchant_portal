@@ -48,10 +48,12 @@ function createContainer(ComposedComponent) {
       const user = event.target[0].value;
       const password = event.target[1].value;
       const { login } = this.props;
-      window.grecaptcha.execute('6LfCh1wUAAAAAFpsjqKEGTdrouFgKwnVIYXOlj1e', {action: 'login'})
-        .then(function(token) {
-          login(user, password, token);
-        });
+      debugger
+      login(user, password);
+      // window.grecaptcha.execute('6LfCh1wUAAAAAFpsjqKEGTdrouFgKwnVIYXOlj1e', {action: 'login'})
+      //   .then(function(token) {
+      //     login(user, password, token);
+      //   });
     }
 
 
