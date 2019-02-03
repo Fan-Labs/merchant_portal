@@ -49,22 +49,14 @@ export function* loginRequest() {
   });
 }
 
-export function* loginSuccess() {
-  // yield takeEvery(actions.LOGIN_SUCCESS, function*(payload) {
-
-  //   yield localStorage.setItem('id_token', payload.token);
-  //   yield put()
-  //   yield put(push('/app'))
-
-  // });
-}
 
 export function* loginError() {
   yield takeEvery(actions.LOGIN_ERROR, function*() {});
 }
 
 export function* logout() {
-  yield takeEvery(actions.LOGOUT, function*() {
+  console.log('running logout saga')
+  yield takeEvery(actions.LOGOUT, function*(action) {
     debugger
     clearToken();
     yield put(push('/'));
@@ -443,24 +435,24 @@ export function* requestJumioTokenWatcher() {
 const { refresh_token_error } = MESSAGE_KEYS
 export function* refreshTokenWatcher() {
   yield takeEvery(actions.REFRESH_AUTH_TOKEN, function*() {
-    if (fakeApiCall) {
+    // if (fakeApiCall) {
 
 
-    }
-    else {
-      try {
-        yield put(appActions.startAsync())
-        yield put(actions.refreshTokenAndUser())
-        const user = getUser();
-        if (user) {
-          yield put(actions.updateUser(user))
-        }
-        yield put(appActions.endAsync())
-      }
-      catch(error) {
-        yield handleError(error, refresh_token_error)
-      }
-    }
+    // }
+    // else {
+    //   try {
+    //     yield put(appActions.startAsync())
+    //     yield put(actions.refreshTokenAndUser())
+    //     const user = getUser();
+    //     if (user) {
+    //       yield put(actions.updateUser(user))
+    //     }
+    //     yield put(appActions.endAsync())
+    //   }
+    //   catch(error) {
+    //     yield handleError(error, refresh_token_error)
+    //   }
+    // }
   });
 }
 
@@ -543,7 +535,8 @@ export function* handleError(error, errorMessageKey, shouldTranslate=false) {
 
 export function* refreshToken() {
   yield takeEvery("@@router/LOCATION_CHANGE", function*() {
-    yield call(refreshTokenAndUser)
+    console.log('route change')
+    //yield call(refreshTokenAndUser)
   });
 }
 
@@ -551,7 +544,6 @@ export default function* rootSaga() {
   yield all([
     fork(checkAuthorization),
     fork(loginRequest),
-    fork(loginSuccess),
     fork(loginError),
     fork(logout),
     fork(passwordReset),

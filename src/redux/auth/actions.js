@@ -53,9 +53,12 @@ const actions = {
     password,
     token
   }),
-  logout: () => ({
-    type: actions.LOGOUT
-  }),
+  logout: () => {
+    debugger
+    return  {
+      type: actions.LOGOUT
+    }
+  },
   requestC20Message: () => ({
     type: actions.REQUEST_C20_MESSAGE
   }),
