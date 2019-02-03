@@ -41,7 +41,8 @@ export function* requestResetEmail(email, otp="") {
 }
 
 export function* resetPassword(newPassword, token, otp="") {
-  const res = yield makeRequest('POST', { action: 'sendResetPwd', password: newPassword, code: otp }, 'v2/auth/reset-password');
+  debugger
+  const res = yield makeRequest('POST', { action: 'resetPwdLong', value: { password: newPassword, token } }, 'authManagement');
   return res;
 }
 

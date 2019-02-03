@@ -126,22 +126,16 @@ const { password_reset_error } = MESSAGE_KEYS
 export function* passwordReset() {
   yield takeEvery(actions.SUBMIT_RESET_PASSWORD, function*(action) {
     const { newPassword, token, code="" } = action
-    yield put(appActions.setLastAPIAction(action))
-    if (fakeApiCall) {
-
-      yield put(push('/'))
-
-    } else {
-
       try {
         yield put(appActions.startAsync())
+        debugger
         yield call(resetPassword, newPassword, token, code)
+        debugger
         yield put(push('/app'))
         yield put(appActions.endAsync())
       } catch(error) {
         yield handleError(error, password_reset_error)
       }
-    }
   });
 }
 

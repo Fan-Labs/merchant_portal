@@ -38,7 +38,7 @@ function createContainer(ComposedComponent) {
       const { token } = queryString.parse(search)
       const newPassword = event.target[0].value
       const confirmPassword = event.target[1].value
-
+      debugger
       if(!token) {
         setMessage(password_reset_error, intl.formatMessage({id: "page.noResetToken"}))
       } else if(newPassword === confirmPassword) {
