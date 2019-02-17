@@ -54,7 +54,7 @@ const actions = {
     token
   }),
   logout: () => {
-    debugger
+    
     return  {
       type: actions.LOGOUT
     }

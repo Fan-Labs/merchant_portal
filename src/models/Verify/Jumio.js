@@ -3,10 +3,9 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import authActions from '../../redux/auth/actions'
-import investActions from '../../redux/invest/actions'
 
 const { getJumioToken, refreshToken } = authActions
-const { setInvestStep } = investActions
+
 
 function mapStateToProps(state, ownprops) {
   return {
@@ -18,7 +17,7 @@ function mapStateToProps(state, ownprops) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     getJumioToken,
-    setInvestStep,
+    //setInvestStep,
     refreshToken,
   }, dispatch);
 }

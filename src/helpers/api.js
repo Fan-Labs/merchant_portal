@@ -14,7 +14,7 @@ export function* makeRequest(method, data, url, headers = {}, params = {}) {
   // }
 
   const res = yield request({ url: `${BACKEND_URL}/${url}`, params, method, data, headers });
-  debugger
+  
   if (res.data.accessToken) setToken(res.data.accessToken)
   return res;
 }
@@ -22,6 +22,7 @@ export function* makeRequest(method, data, url, headers = {}, params = {}) {
 export function* makeAuthedRequest(method, data, url, headers, params = {}) {
   const token = getValidToken();
   if (!token) return null;
+  
   const requestHeaders = { ...headers, 'Authorization': `Bearer ${token}` };
   const res = yield makeRequest(method, data, url, requestHeaders, params);
   return res;
@@ -29,9 +30,9 @@ export function* makeAuthedRequest(method, data, url, headers, params = {}) {
 
 
 export function* signup(email, password, isMerchant=true, isAdmin=false, strategy='local') {
-  debugger
+  
   const res = yield makeRequest('POST', { strategy, email, password, isAdmin, isMerchant }, 'users');
-  debugger
+  
   return res;
 }
 
@@ -41,7 +42,7 @@ export function* requestResetEmail(email, otp="") {
 }
 
 export function* resetPassword(newPassword, token, otp="") {
-  debugger
+  
   const res = yield makeRequest('POST', { action: 'resetPwdLong', value: { password: newPassword, token } }, 'authManagement');
   return res;
 }
@@ -58,7 +59,7 @@ export function* login(email, password, token, otp="", strategy='local') {
 
 
 export function* verifyMail(token, otp="") {
-  debugger
+  
   const res = yield makeRequest('POST', { action: 'verifySignupLong', value: token }, 'authManagement');
   return res;
 }
@@ -76,6 +77,11 @@ export function* updateUserProfile(user, otp="") {
 
 export function* updatePassword(oldPassword, newPassword, otp="") {
   const res = yield makeAuthedRequest('PUT', { old_password: oldPassword, new_password: newPassword, code: otp }, 'v2/settings/password');
+  return res;
+}
+
+export function* fetchBusinesses() {
+  const res = yield makeAuthedRequest('GET', { }, 'businesses');
   return res;
 }
 
@@ -116,7 +122,7 @@ export function* softRefreshToken() {
 }
 
 export function* uploadDocument(file, documentType) {
-  debugger
+  
   const formData = new FormData();
   formData.append('document_type', documentType);
   formData.append('document', file);
@@ -125,7 +131,7 @@ export function* uploadDocument(file, documentType) {
   const res = yield makeAuthedRequest('POST', formData, `v2/verification/documents`, {
     accept: 'application/json',
   });
-  debugger
+  
   //yield makeAuthedRequest('DELETE', {docID}, `v2/accounts/aml_documents`);
   //yield null;
   //const res = yield makeAuthedRequest('DELETE', {docID}, `v2/accounts/aml_documents`)

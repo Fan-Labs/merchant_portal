@@ -9,7 +9,7 @@ import StepsModel from '../../models/Verify/Steps'
 const Step = Steps.Step
 
 const KYCSteps = ({ kycStatus, investStep, setInvestStep, submitKYCerror, isLoading, requiredSteps }) => {
-  debugger
+  
   return(
   <StepsWrapper>
     <Steps current={investStep} size="small">

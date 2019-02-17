@@ -33,7 +33,7 @@ export default function authReducer(state = initState, action) {
       //return state.set('idToken', action.token)
       //return state.set('user', jwt_decode(action.token).user)
     case actions.LOGOUT:
-      debugger
+      
       return state;
     case actions.UPDATE_USER:
       //const user = state.get('user')

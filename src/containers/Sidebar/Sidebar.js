@@ -130,21 +130,13 @@ class Sidebar extends Component {
                   </span>
                 </Link>
               </Menu.Item>
-              <Menu.Item  key="kyc">
-                <Link to={`${url}/kycverification`}>
-                  <span className={isKYCVerified? "verifiedColor isoMenuHolder": "unVerifiedColor isoMenuHolder"} >
-                    <i className="ion-checkmark-circled" />
-                    { isKYCVerified? <IntlMessages id="kyc.done" /> : <IntlMessages id="sidebar.kyc" /> }
-                  </span>
-                </Link>
-              </Menu.Item>
               <SubMenu
                 key="hyperion"
                 title={
                   <span className="isoMenuHolder" style={submenuColor}>
                     <i className="icon-gamedex-icon" />
                     <span className="nav-text">
-                      <IntlMessages id="sidebar.funds" />
+                      <IntlMessages id="sidebar.businesses" />
                     </span>
                   </span>
                 }
@@ -164,16 +156,12 @@ class Sidebar extends Component {
                    <IntlMessages id="sidebar.perseus.claim" />
                  </Link>
                </Menu.Item>
-               <Menu.Item style={submenuStyle} key="perseus.whitepaper">
-                 <a
-                  style={submenuColor}
-                  href="https://www.gamedex.co/docs/Gamedex_Whitepaper.pdf"
-                  target="_blank" rel="noopener noreferrer"
-                  onClick={()=> whitepaperFomoEvent(first_name)}
-                  >
-                   <IntlMessages id="sidebar.perseus.whitepaper" />
-                 </a>
-               </Menu.Item>
+               <Menu.Item style={submenuStyle}  key="new">
+                  <Link style={submenuColor} to={`${url}/business/new`}>
+                      <i className="ion-android-add-circle" />&nbsp;&nbsp;
+                      { <IntlMessages id="sidebar.add_business" /> }
+                  </Link>
+              </Menu.Item>
               </SubMenu>
 
 

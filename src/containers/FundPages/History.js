@@ -2,7 +2,6 @@ import React from 'react'
 import { Alert } from 'antd'
 import LayoutContentWrapper from '../../components/utility/layoutWrapper'
 import LayoutContent from '../../components/utility/layoutContent'
-import FundHistory from '../../components/fundHistory/fundHistory'
 import IntlMessages from '../../components/utility/intlMessages'
 import HistoryModel from '../../models/Fund/History'
 
@@ -22,12 +21,6 @@ const History = ({ match, tokenClaimResult }) => (
         }
       />
       <br/>
-      <FundHistory fund="Gamedex"
-        textKey="history.note"
-        additionalTextKey={`history.${match.params.fund}.add_text`}
-        transactionTextKey={`history.${match.params.fund}.transaction_text`}
-        disimbursementTextKey={`history.${match.params.fund}.disimbursement`}
-      />
     </LayoutContent>
   </LayoutContentWrapper>
 )

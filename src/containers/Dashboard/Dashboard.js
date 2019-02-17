@@ -3,10 +3,10 @@ import IntlMessages from '../../components/utility/intlMessages'
 import LayoutContentWrapper from '../../components/utility/layoutWrapper'
 import LayoutContent from '../../components/utility/layoutContent'
 import DashboardWrapper from './Dashboard.style'
-import ProfileProgress from './ProfileProgress'
+import BusinessCardList from '../Businesses/BusinessCardList'
 import DashboardModel from '../../models/Dashboard/Dashboard'
 
-const Dashboard = ({ name, kycStatus, isNew, ethAddress }) => (
+const Dashboard = ({ name, kycStatus, isNew }) => (
   <LayoutContentWrapper>
     <LayoutContent>
       <DashboardWrapper>
@@ -21,17 +21,16 @@ const Dashboard = ({ name, kycStatus, isNew, ethAddress }) => (
                   <IntlMessages id="dashboard.thankYou" />
                 )}
               </div>
-              <div className="instructions">
+{  /*            <div className="instructions">
                 <IntlMessages id="dashboard.introText" />
               </div>
-              <div className="subheader">
-                <IntlMessages id="dashboard.requirementsMessage" />
+  */ }
+              <div className="instructions">
+                <IntlMessages id="dashboard.businesses" />
               </div>
             </div>
           </div>
-          <div className="alerts">
-            <ProfileProgress />
-          </div>
+          <BusinessCardList />
         </div>
       </DashboardWrapper>
     </LayoutContent>

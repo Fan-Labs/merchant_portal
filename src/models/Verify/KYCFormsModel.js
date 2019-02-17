@@ -3,11 +3,9 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import { MESSAGE_KEYS } from '../../constants'
-import investActions from '../../redux/invest/actions'
 import authActions from '../../redux/auth/actions'
 import messageActions from '../../redux/messages/actions'
 
-const { setInvestStep } = investActions
 const { clearAll } = messageActions
 const { submitKYC, fetchAMLDocList } = authActions
 const { submit_kyc_error } = MESSAGE_KEYS
@@ -25,7 +23,6 @@ function mapStateToProps(state, ownprops) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    setInvestStep,
     submitKYC,
     clearAll,
     fetchAMLDocList
@@ -48,7 +45,7 @@ function createContainer(ComposedComponent) {
 
       //increment invest step if the update was a questionnaire successfully submitted
       if(oldProps.questionnaire===false && this.props.questionnaire) {
-        debugger
+        
         this.prop.setInvestStep()
       }
     }

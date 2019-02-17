@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import fundActions from '../../redux/funds/actions'
 
-const { setTokenClaimResult } = fundActions
+
 
 function mapStateToProps(state, ownprops) {
   return {
@@ -13,7 +12,7 @@ function mapStateToProps(state, ownprops) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    setTokenClaimResult
+
   }, dispatch);
 }
 

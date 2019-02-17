@@ -1,9 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import investActions from '../../redux/invest/actions'
 
-const { retrieveAddress, setInvestStep, pollForConfirmation } = investActions
 
 function mapStateToProps(state, ownprops) {
   return {
@@ -17,9 +15,6 @@ function mapStateToProps(state, ownprops) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    retrieveAddress,
-    setInvestStep,
-    pollForConfirmation,
   }, dispatch);
 }
 

@@ -2,11 +2,9 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import investActions from '../../redux/invest/actions'
 import authActions from '../../redux/auth/actions'
 
 const { fetchAMLDocList, uploadDocuments } = authActions
-const { setInvestStep } = investActions
 
 function mapStateToProps(state, ownprops) {
   return {
@@ -19,7 +17,6 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     fetchAMLDocList,
     uploadDocuments,
-    setInvestStep
   }, dispatch);
 }
 
@@ -61,7 +58,7 @@ function createContainer(ComposedComponent) {
     handleUpload() {
       const {upload_queue} = this.state
       const {documentType} = this.props
-      debugger
+      
       this.props.uploadDocuments(upload_queue, documentType)
     }
 

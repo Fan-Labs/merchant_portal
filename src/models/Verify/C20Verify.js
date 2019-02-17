@@ -3,11 +3,8 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import authActions from '../../redux/auth/actions'
-import investActions from '../../redux/invest/actions'
 import { MESSAGE_KEYS } from '../../constants'
 import { tryParseJSON, captureEvent } from '../../helpers/utility'
-
-const { setInvestStep } = investActions
 const { c20validate, requestC20Message } = authActions
 const { c20_message_fail, c20_verify_fail } = MESSAGE_KEYS
 
@@ -25,7 +22,6 @@ function mapStateToProps(state, ownprops) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     c20validate,
-    setInvestStep,
     requestC20Message
   }, dispatch);
 }

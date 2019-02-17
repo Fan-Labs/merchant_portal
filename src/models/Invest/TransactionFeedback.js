@@ -1,11 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import investActions from '../../redux/invest/actions'
 import { captureEvent, investFomoEvent } from '../../helpers/utility'
-
-
-const { setConfirmation } = investActions
 
 function mapStateToProps(state, ownprops) {
   return {
@@ -19,7 +15,6 @@ function mapStateToProps(state, ownprops) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    setConfirmation
   }, dispatch);
 }
 

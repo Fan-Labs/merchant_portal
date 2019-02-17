@@ -21,7 +21,7 @@ export function getKeys(object) {
   };
 }
 export function getValues(enMessages) {
-  debugger
+  
   const { keys, variables } = getKeys(enMessages);
   const langs = [english, ch, fr, ital, span, arab];
   const langsNm = ['eng', 'ch', 'fr', 'ital', 'span', 'arab'];

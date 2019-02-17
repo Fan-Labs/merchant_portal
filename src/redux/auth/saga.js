@@ -4,7 +4,7 @@ import { clearToken, getUser } from '../../helpers/utility'
 import { MESSAGE_KEYS } from '../../constants'
 import actions from './actions'
 import appActions from '../app/actions'
-import investActions from '../invest/actions'
+import businessActions from '../businesses/actions'
 import messageActions from '../messages/actions'
 import { captureEvent } from '../../helpers/utility'
 import { signupFomoEvent } from '../../helpers/utility';
@@ -38,10 +38,11 @@ export function* loginRequest() {
         yield put(appActions.startAsync())
         //yield put(appActions.setLastAPIAction(action))
         yield call(login, user, password, token, code)
-        debugger
+        
         yield put(actions.updateUser(getUser()))
-        // const status = yield call(checkKYCStatus)
+        yield call(businessActions.fetchUserBusinesses)
         // yield put(actions.setKYCStatus(status.data.verification))
+        yield put(appActions.endAsync())
         yield put(push('/app'))
       } catch(error) {
         yield handleError(error, login_error)
@@ -57,7 +58,7 @@ export function* loginError() {
 export function* logout() {
   console.log('running logout saga')
   yield takeEvery(actions.LOGOUT, function*(action) {
-    debugger
+    
     clearToken();
     yield put(push('/'));
   });
@@ -70,7 +71,7 @@ export function* signupRequest() {
     yield put(appActions.setLastAPIAction(action))
       try {
         yield call(signup, email, password)
-        debugger
+        
         yield put(messageActions.setMessage(signup_success, signup_success))
         //signupFomoEvent(first_name)
 
@@ -120,9 +121,9 @@ export function* passwordReset() {
     const { newPassword, token, code="" } = action
       try {
         yield put(appActions.startAsync())
-        debugger
+        
         yield call(resetPassword, newPassword, token, code)
-        debugger
+        
         yield put(push('/app'))
         yield put(appActions.endAsync())
       } catch(error) {
@@ -138,9 +139,9 @@ export function* verifyMailWatcher() {
     //yield put(appActions.setLastAPIAction(action))
     try {
       yield put(appActions.startAsync())
-      debugger
+      
       yield call(verifyMail, token, code)
-      debugger
+      
       yield put(messageActions.setMessage(email_verify_success, email_verify_success))
       yield put(appActions.endAsync())
     } catch(error) {
@@ -409,9 +410,9 @@ export function* uploadAMLDocWatcher() {
       try {
         yield put(appActions.startAsync())
 
-        debugger
+        
         for(var i=0 ; i<documents.length ; i++){
-          debugger
+          
           yield call(uploadDocument, documents[i], documentType)
         }
 

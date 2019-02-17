@@ -18,7 +18,7 @@ const SidebarWrapper = styled.div`
 
     .verifiedColor {
       color: ${palette('success', 0)};
-      filter: brightness(150%);
+      ${transition()};
     }
 
     .unVerifiedColor {
@@ -306,6 +306,9 @@ const SidebarWrapper = styled.div`
 
           &:hover {
             a {
+              color: #ffffff !important;
+            }
+            i {
               color: #ffffff !important;
             }
           }

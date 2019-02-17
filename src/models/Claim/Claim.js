@@ -2,11 +2,11 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import fundActions from '../../redux/funds/actions'
+
 import { claimFomoEvent } from '../../helpers/utility'
 import { MESSAGE_KEYS } from '../../constants'
 
-const { fetchFundBalances, submitTokenClaim, setTokenClaimResult } = fundActions
+
 const { submit_claim_error } = MESSAGE_KEYS
 
 function mapStateToProps(state, ownprops) {
@@ -21,9 +21,7 @@ function mapStateToProps(state, ownprops) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    fetchFundBalances,
-    submitTokenClaim,
-    setTokenClaimResult
+
   }, dispatch);
 }
 
@@ -39,8 +37,8 @@ function createContainer(ComposedComponent) {
     }
 
     componentDidMount() {
-      const { fund, fetchFundBalances } = this.props
-      fetchFundBalances(fund)
+      
+     
     }
 
     initiateClaim(event) {
@@ -51,9 +49,7 @@ function createContainer(ComposedComponent) {
     }
 
     handleSubmit(values) {
-      const { submitTokenClaim, fund, first_name } = this.props
-      submitTokenClaim(fund, values.amount, values.address, values.password)
-      claimFomoEvent(first_name, values.amount)
+      
     }
 
 

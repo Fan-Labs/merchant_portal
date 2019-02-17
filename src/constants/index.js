@@ -117,5 +117,6 @@ export const MESSAGE_KEYS = {
   get_transactions_fails: 'history.getTransactionsFail',
   get_withdrawals_fails: 'history.getWithdrawalsFail',
   get_address_fail: 'invest.getAddressFail',
-  submit_claim_error: 'claim.submitClaimError'
+  submit_claim_error: 'claim.submitClaimError',
+  fetch_business_error: 'app.fetchBusinessError'
 }

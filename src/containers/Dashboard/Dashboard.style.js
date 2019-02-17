@@ -52,7 +52,6 @@ const DashboardWrapper = styled.div`
 
   .instructions {
     font-size: 20px;
-    margin-bottom: 20px;
     @media only screen and (max-width: 767px) {
       font-size: 16px;
     }

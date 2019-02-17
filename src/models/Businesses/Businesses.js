@@ -1,37 +1,47 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
+import appActions from '../../redux/app/actions'
+import businessActions from '../../redux/businesses/actions'
 
+const { fetchUserBusinesses } = businessActions
 
-function mapStateToProps(state, ownProps) {
-  const fund = ownProps.fund || ownProps.match.params.fund
+function mapStateToProps(state, ownprops) {
   return {
-    fund,
-    summary: state.Funds.getIn(['funds', fund]),
+    businesses: state.Businesses.get('businesses'),
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
+    fetchUserBusinesses
   }, dispatch);
 }
 
 function createContainer(ComposedComponent) {
   class Container extends Component {
 
+    constructor(props) {
+      super(props)
+      this.handleSubmit = this.handleSubmit.bind(this)
+    }
+
+    handleSubmit(values) {
+      console.log(values)
+    }
+
     componentDidMount() {
+     this.props.fetchUserBusinesses() 
     }
 
     render() {
       return (
         <ComposedComponent
           {...this.props}
-          {...this.state}
         />
       );
     }
   }
-
 
   return connect(mapStateToProps, mapDispatchToProps)(Container);
 }

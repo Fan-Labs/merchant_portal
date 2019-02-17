@@ -2,7 +2,7 @@ import React from 'react'
 import IntlMessages from '../../components/utility/intlMessages'
 import Button from '../../components/uielements/button'
 import { Icon, Alert } from 'antd'
-import Withdrawals from '../../components/fundHistory/withdrawals'
+
 import ClaimWrapper from './Claim.style'
 import ClaimForm from './ClaimForm'
 import ClaimModel from '../../models/Claim/Claim'
@@ -39,7 +39,7 @@ const Claim = ({ fund, balance, isLoading, submitClaimError, tokenClaimResult, s
       <div className="table-section">
         {!showClaimForm? (
           <React.Fragment>
-            <Withdrawals fund={fund} />
+
             <Button type="primary" onClick={initiateClaim}>
               <IntlMessages id="claim.claim_balance"
                 values={{

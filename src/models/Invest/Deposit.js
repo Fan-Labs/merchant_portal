@@ -2,9 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import investActions from '../../redux/invest/actions'
 
-const { setCurrency, setInvestStep, getRates } = investActions
 
 function mapStateToProps(state, ownprops) {
   return {
@@ -15,9 +13,6 @@ function mapStateToProps(state, ownprops) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    setCurrency,
-    setInvestStep, 
-    getRates,
   }, dispatch);
 }
 

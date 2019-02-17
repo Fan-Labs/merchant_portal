@@ -3,12 +3,10 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import { MESSAGE_KEYS, KYC_STATUSES } from '../../constants'
-import investActions from '../../redux/invest/actions'
 import authActions from '../../redux/auth/actions'
 import messageActions from '../../redux/messages/actions'
 import StepMap from './StepMap'
 
-const { setInvestStep } = investActions
 const { clearAll } = messageActions
 const { submitKYC } = authActions
 const { submit_kyc_error } = MESSAGE_KEYS
@@ -27,7 +25,6 @@ function mapStateToProps(state, ownprops) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    setInvestStep,
     submitKYC,
     clearAll,
   }, dispatch);

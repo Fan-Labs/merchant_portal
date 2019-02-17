@@ -2,9 +2,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Chart from 'chart.js';
 import {bindActionCreators} from 'redux'
-import fundActions from '../../redux/funds/actions'
-
-const { fetchFundHoldings } = fundActions
 
 
 function mapStateToProps(state, ownProps) {
@@ -17,7 +14,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    fetchFundHoldings
+    
   }, dispatch);
 }
 
@@ -33,7 +30,7 @@ class FundHoldings extends Component {
 
   componentDidMount() {
     const { fund } = this.props
-    this.props.fetchFundHoldings(fund)
+   
     const ctx = document.getElementById('fundHoldings').getContext('2d')
     this.setState({chartElement: ctx})
   }

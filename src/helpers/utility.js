@@ -1,5 +1,5 @@
 import request from 'axios'
-import ReactGA from 'react-ga'
+//import ReactGA from 'react-ga'
 import jwt_decode from 'jwt-decode'
 import moment from 'moment'
 import fomoClient from '../config/useFomo'
@@ -84,15 +84,15 @@ export function filterSpecialCharacters(string) {
 }
 
 export function pageView() {
-  ReactGA.pageview(window.location.pathname + window.location.search)
+  //ReactGA.pageview(window.location.pathname + window.location.search)
 }
 
 export function captureEvent(category, action, label) {
-  ReactGA.event({
-    category,
-    action,
-    label
-  });
+  // ReactGA.event({
+  //   category,
+  //   action,
+  //   label
+  // });
 }
 
 
