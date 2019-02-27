@@ -59,7 +59,7 @@ const App = ({ toggleAll, locale, history, match: { url } }) => (
                     borderTop: '1px solid #ededed'
                   }}
                 >
-                  <IntlMessages id="app.footerText" />
+                  Footer Text
                 </Footer>
               </Layout>
             </Layout>

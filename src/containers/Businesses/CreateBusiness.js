@@ -3,21 +3,22 @@ import IntlMessages from '../../components/utility/intlMessages'
 import LayoutContentWrapper from '../../components/utility/layoutWrapper'
 import LayoutContent from '../../components/utility/layoutContent'
 import Map from '../../components/map/map'
-import {Icon} from 'antd'
+import {Icon, Carousel} from 'antd'
 import GoogleMapReact from 'google-map-react';
 import CreateBusinessModel from '../../models/Businesses/CreateBusiness'
 import CreateBusinessForm from './CreateBusinessForm'
 import CreateBusinessWrapper from './CreateBusiness.style'
 
-const CreateBusiness = ({ handleSubmit, placeSuggestion, setPlacesAPIBusiness }) => (
+const CreateBusiness = ({ handleSubmit, placeSuggestion, setPlacesAPIBusiness, isLoading }) => (
   <LayoutContentWrapper>
     <LayoutContent>
       <CreateBusinessWrapper>
         <CreateBusinessForm 
           onSubmit={handleSubmit}
           setPlacesAPIBusiness={setPlacesAPIBusiness}
+          isLoading={isLoading}
         />
-        <div className="map">
+        <div className="column">
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzSyCIZxNzm4lJE83DxVAmy45P9R6M-fJcjL4' }}
           defaultCenter={{
@@ -32,7 +33,13 @@ const CreateBusiness = ({ handleSubmit, placeSuggestion, setPlacesAPIBusiness })
               lng={placeSuggestion && placeSuggestion.location? placeSuggestion.location.lng : null} 
             />
         </GoogleMapReact>
-        
+        {placeSuggestion && placeSuggestion.photos && (
+          <Carousel autoplay>
+          {placeSuggestion.photos.map((photoUrl,i) => 
+            <img src={photoUrl} />
+          )}
+          </Carousel>
+        )} 
         </div>
       </CreateBusinessWrapper>
     </LayoutContent>

@@ -70,7 +70,7 @@ class Sidebar extends Component {
   };
 
   render() {
-    const { url, app, toggleOpenDrawer, isKYCVerified, first_name } = this.props;
+    const { url, app, toggleOpenDrawer, isKYCVerified, first_name, businesses } = this.props;
     const customizedTheme = getCurrentTheme('sidebarTheme', themeConfig.theme);
     const collapsed = clone(app.collapsed) && !clone(app.openDrawer);
     const { openDrawer } = app;
@@ -98,6 +98,14 @@ class Sidebar extends Component {
     const submenuColor = {
       color: customizedTheme.textColor,
     };
+
+    const busMenus = businesses.map((biz,i) => 
+                  <Menu.Item style={submenuStyle} key={`biz${i}`}>
+                    <Link style={submenuColor} to={`business/biz.id`}>
+                      {biz.name}
+                    </Link>
+                  </Menu.Item>
+                )
 
     return (
       <SidebarWrapper >
@@ -140,28 +148,14 @@ class Sidebar extends Component {
                     </span>
                   </span>
                 }
-              >
-                <Menu.Item style={submenuStyle} key="perseus.invest">
-                  <Link style={submenuColor} to={`${url}/gamedex/invest`}>
-                    <IntlMessages id="sidebar.perseus.invest" />
-                  </Link>
-                </Menu.Item>
-               <Menu.Item style={submenuStyle} key="perseus.history">
-                 <Link style={submenuColor} to={`${url}/gamedex/history`}>
-                   <IntlMessages id="sidebar.perseus.history" />
-                 </Link>
-               </Menu.Item>
-               <Menu.Item style={submenuStyle} key="perseus.claim">
-                 <Link style={submenuColor} to={`${url}/gamedex/claim`}>
-                   <IntlMessages id="sidebar.perseus.claim" />
-                 </Link>
-               </Menu.Item>
-               <Menu.Item style={submenuStyle}  key="new">
-                  <Link style={submenuColor} to={`${url}/business/new`}>
+              > 
+              {busMenus}
+                <Menu.Item style={submenuStyle}  key="new">
+                  <Link style={submenuColor} to={`${url}/businesses/new`}>
                       <i className="ion-android-add-circle" />&nbsp;&nbsp;
                       { <IntlMessages id="sidebar.add_business" /> }
                   </Link>
-              </Menu.Item>
+                </Menu.Item>
               </SubMenu>
 
 
@@ -229,6 +223,7 @@ class Sidebar extends Component {
 export default connect(
   state => ({
     app: state.App.toJS(),
+    businesses: state.Businesses.get('businesses'),
     isKYCVerified: state.Auth.get('user').verified,
     first_name: state.Auth.get('user').first_name,
   }),

@@ -25,9 +25,6 @@ const Dashboard = ({ name, kycStatus, isNew }) => (
                 <IntlMessages id="dashboard.introText" />
               </div>
   */ }
-              <div className="instructions">
-                <IntlMessages id="dashboard.businesses" />
-              </div>
             </div>
           </div>
           <BusinessCardList />

@@ -7,7 +7,7 @@ export default ({ collapsed, goHome }) => {
     <div className="isoLogoWrapper" onClick={goHome}>
       {collapsed ? (
         <Link to="/dashboard">
-          <img src={favicon} alt="" />
+          
         </Link>
       ) : (
         <div className="companyLogo" />

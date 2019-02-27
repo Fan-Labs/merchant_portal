@@ -20,7 +20,7 @@ const CreateBusinessForm = ({ handleSubmit, valid, isLoading }) => (
     </div>
     <div className="block">
       <label>Location</label>
-      <Field name="address" component={GeoSuggestInput} />
+      <Field name="streetAddress" component={GeoSuggestInput} />
     </div>
     <div className="block">
       <label>Phone Number</label>

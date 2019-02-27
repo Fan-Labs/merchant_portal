@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { captureEvent, investFomoEvent } from '../../helpers/utility'
 
 function mapStateToProps(state, ownprops) {
   return {
@@ -23,8 +22,6 @@ function createContainer(ComposedComponent) {
 
   componentDidMount() {
     const { userId, first_name, selectedCurrency } = this.props
-    captureEvent("Invest", "Hyperion Transaction", `User: ${userId}`)
-    investFomoEvent(first_name, selectedCurrency)
   }
 
   componentWillUnmount() {

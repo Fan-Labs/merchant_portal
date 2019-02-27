@@ -88,7 +88,7 @@ const SidebarWrapper = styled.div`
       ${borderRadius()};
 
       .companyLogo {
-        background: url(${companyLogo}) no-repeat center center;
+        
         background-size: contain;
         width: 100%;
         height: 100%;

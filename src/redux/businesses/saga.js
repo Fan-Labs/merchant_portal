@@ -6,7 +6,9 @@ import appActions from '../app/actions'
 import actions from './actions'
 import {
   fetchBusinesses,
+  saveBusiness,
 } from '../../helpers/api'
+import { notification } from 'antd'
 
 
 const { fetch_business_error } = MESSAGE_KEYS
@@ -38,16 +40,23 @@ export function* setFieldsFromGooglePlaces() {
             icon,
             rating,
             website,
-            types
+            types,
+            photos
           },
           location: { lat, lng }
         } = place;
         if(international_phone_number) yield put(change('NewBusiness', 'phoneNumber', international_phone_number))
         if(types.includes('establishment') && name) yield put(change('NewBusiness', 'name', name))
-        if(formatted_address) yield put(change('NewBusiness', 'address', formatted_address))
+        if(formatted_address) yield put(change('NewBusiness', 'streetAddress', formatted_address))
         if(website) yield put(change('NewBusiness', 'website', website))
         if(lat) yield put(change('NewBusiness', 'latitude', lat))
         if(lat) yield put(change('NewBusiness', 'longitude', lng))
+        if(photos && photos.length >= 3) {
+          const firstImage = yield photos[0].getUrl()
+          const secondImage = yield photos[1].getUrl()
+          const thirdImage = yield photos[2].getUrl()
+          yield put(actions.setPlacesAPIPhotos([firstImage, secondImage, thirdImage]))
+        }
         
       } catch(error) {
         yield handleError(error, fetch_business_error)
@@ -56,11 +65,38 @@ export function* setFieldsFromGooglePlaces() {
   });
 }
 
+export function* saveBusinessWatcher() {
+  yield takeEvery(actions.SAVE_BUSINESS, function*({values}) {
+        try {
+        yield put(appActions.startAsync())
+        //get the google place object to add to the save business request
+        const APIPlaceObject = yield select(getAPIPlaceObject)
+        const req = yield call(saveBusiness, {
+          ...values,
+          googlePlace: APIPlaceObject
+        })
+        yield put(actions.addOrUpdateBusiness(req.data))
+        notification.success({
+          message: 'Business Saved!',
+          placement: 'topRight'
+        });
+        yield put(appActions.endAsync())
+        
+      } catch(error) {
+        yield handleError(error, fetch_business_error)
+      }
+
+  });
+}
+
+//State selector
+const getAPIPlaceObject = state => state.Businesses.get('placesAPIResult')
 
 
 export default function* rootSaga() {
   yield all([
     fork(fetchBusinessesWatcher),
-    fork(setFieldsFromGooglePlaces)
+    fork(setFieldsFromGooglePlaces),
+    fork(saveBusinessWatcher)
   ]);
 }

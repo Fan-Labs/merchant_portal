@@ -85,6 +85,12 @@ export function* fetchBusinesses() {
   return res;
 }
 
+export function* saveBusiness(business) {
+  const res = yield makeAuthedRequest('POST', business, 'businesses');
+  return res;
+}
+
+
 export function* getOTPSMS(number, otp="") {
   const res = yield makeAuthedRequest('POST', { number }, 'v2/settings/phone');
   return res;

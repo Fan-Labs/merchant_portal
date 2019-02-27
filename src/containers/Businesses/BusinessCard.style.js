@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { palette } from 'styled-theme';
 
-const CreateBusinessCardWrapper = styled.div`
+const BusinessCardWrapper = styled.div`
   display: flex;
   padding: 10px;
   flex-direction: column;
@@ -30,6 +30,7 @@ const CreateBusinessCardWrapper = styled.div`
     text-overflow: ellipses;
   }
 
+
 `
 
-export default CreateBusinessCardWrapper
+export default BusinessCardWrapper

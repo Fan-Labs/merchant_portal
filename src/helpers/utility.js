@@ -47,6 +47,15 @@ export function getUser() {
   }
 }
 
+export function getIndexByProperty(data, key, value) {
+  for (var i = 0; i < data.length; i++) {
+        if (data[i][key] == value) {
+            return i;
+        }
+    }
+  return -1;
+}
+
 export function isPriorityPeriod(fundName) {
 
 }
@@ -113,58 +122,6 @@ export function getRandomArbitrary(min, max) {
   // }
 }
 
-export async function kycFomoEvent(name) {
-    const basicEvent = fomoClient.FomoEventBasic();
-    basicEvent.event_type_id = '76851'; // Event type ID is found on Fomo dashboard (Templates -> Template ID)
-    basicEvent.first_name = name.split(" ")[0];
-    basicEvent.country = await getUserCountry()
-    //basicEvent.amount = 'A HUGE'
-
-    fomoClient.createEvent(basicEvent)
-}
-
-export async function signupFomoEvent(name) {
-    const basicEvent = fomoClient.FomoEventBasic();
-    basicEvent.event_type_id = '76712'; // Event type ID is found on Fomo dashboard (Templates -> Template ID)
-    basicEvent.first_name = name.split(" ")[0];
-    basicEvent.country = await getUserCountry()
-
-
-    fomoClient.createEvent(basicEvent)
-
-}
-
-export async function investFomoEvent(name, selectedCurrency) {
-    const basicEvent = fomoClient.FomoEventBasic();
-    basicEvent.event_type_id = '76711'; // Event type ID is found on Fomo dashboard (Templates -> Template ID)
-    basicEvent.first_name = name.split(" ")[0];
-    basicEvent.country = await getUserCountry()
-    basicEvent.addCustomEventField('currency', selectedCurrency);
-
-
-    fomoClient.createEvent(basicEvent)
-}
-
-export async function whitepaperFomoEvent(name) {
-    const basicEvent = fomoClient.FomoEventBasic();
-    basicEvent.event_type_id = '76853';
-    basicEvent.first_name = name.split(" ")[0];
-    basicEvent.country = await getUserCountry()
-    //basicEvent.amount = 'A HUGE'
-
-    fomoClient.createEvent(basicEvent)
-}
-
-export async function claimFomoEvent(name, amount) {
-    const basicEvent = fomoClient.FomoEventBasic();
-    basicEvent.event_type_id = '76865'; // Event type ID is found on Fomo dashboard (Templates -> Template ID)
-    basicEvent.first_name = name.split(" ")[0];
-    basicEvent.country = await getUserCountry()
-    basicEvent.addCustomEventField('amount', amount);
-
-    fomoClient.createEvent(basicEvent)
-
-}
 
 export async function getUserCountry() {
   try {

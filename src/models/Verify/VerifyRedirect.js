@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import { captureEvent, kycFomoEvent } from '../../helpers/utility'
 import queryString from 'query-string'
 import authActions from '../../redux/auth/actions'
 
@@ -35,19 +34,7 @@ function createContainer(ComposedComponent) {
     }
 
     componentDidMount(){
-      const { userId, first_name, location: { search } } = this.props
-      const params = queryString.parse(search)
-      const { idScanStatus } = params
-      this.setState({params: params})
-      if(idScanStatus === 'SUCCESS') {
-        this.props.idVerifySuccess(this.props.kycAuthToken)
-        captureEvent("Users", "KYC success", `User: ${userId}`)
-        kycFomoEvent(first_name)
-        this.setState({didSucceed: true})
-      } else {
-        captureEvent("Users", "KYC fail", `User: ${userId}`)
-        this.setState({didSucceed: false})
-      }
+     
     }
 
 
