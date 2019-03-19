@@ -80,6 +80,17 @@ export function* updatePassword(oldPassword, newPassword, otp="") {
   return res;
 }
 
+export function* fetchTeams() {
+  const res = yield makeAuthedRequest('GET', { }, 'teams');
+  return res;
+}
+
+export function* fetchTeam(id) {
+  debugger
+  const res = yield makeAuthedRequest('GET', { }, `teams/${id}`);
+  return res;
+}
+
 export function* fetchBusinesses() {
   const res = yield makeAuthedRequest('GET', { }, 'businesses');
   return res;

@@ -32,7 +32,7 @@ export function setToken(token) {
 //allows for importing a folder of images - ie importAll(require.context('./images', false, /\.(png|jpe?g|svg)$/))
 export function importAll(requireContext) {
   let images = {};
-  r.keys().forEach((item, index) => { images[item.replace('./', '')] = r(item); });
+  requireContext.keys().forEach((item, index) => { images[item.replace('./', '')] = requireContext(item); });
   return images;
 }
 
