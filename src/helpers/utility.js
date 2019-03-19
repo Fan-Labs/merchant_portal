@@ -28,6 +28,14 @@ export function setToken(token) {
   setUser(jwt_decode(token).user)
 }
 
+
+//allows for importing a folder of images - ie importAll(require.context('./images', false, /\.(png|jpe?g|svg)$/))
+export function importAll(requireContext) {
+  let images = {};
+  r.keys().forEach((item, index) => { images[item.replace('./', '')] = r(item); });
+  return images;
+}
+
 export function setRates(rates) {
   localStorage.setItem('fund_rates', JSON.stringify(rates))
 }

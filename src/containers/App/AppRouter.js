@@ -24,8 +24,8 @@ class AppRouter extends React.Component {
         />
         <Route
           exact
-          path={`${url}/:fund/invest`}
-          component={asyncComponent(() => import('../FundPages/Invest'))}
+          path={`${url}/business/:id`}
+          component={asyncComponent(() => import('../Businesses/Business/BusinessPage'))}
         />
         <Route
           exact

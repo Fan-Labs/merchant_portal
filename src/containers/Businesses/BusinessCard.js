@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import {Card, Carousel} from 'antd'
 const { Meta } = Card;
 
-const BusinessCard = ({ business: { name, streetAddress, googlePlace }, index}) => (
+const BusinessCard = ({ business: { id, name, streetAddress, googlePlace }, index}) => (
   <BusinessCardWrapper index={index} image={googlePlace && googlePlace.photos? googlePlace.photos[0] : placeholder}>
   	<Card
 	    hoverable
@@ -13,7 +13,7 @@ const BusinessCard = ({ business: { name, streetAddress, googlePlace }, index}) 
 	    cover={<div alt="example" className="banner" />}
 	  >
     <Meta
-      title={name}
+      title={<Link to={`/app/business/${id}`}>{name}</Link>}
       description={streetAddress}
       className="card-text-container"
     />

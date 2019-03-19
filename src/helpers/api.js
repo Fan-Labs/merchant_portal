@@ -85,6 +85,12 @@ export function* fetchBusinesses() {
   return res;
 }
 
+export function* fetchBusiness(id) {
+  debugger
+  const res = yield makeAuthedRequest('GET', { }, `businesses/${id}`);
+  return res;
+}
+
 export function* saveBusiness(business) {
   const res = yield makeAuthedRequest('POST', business, 'businesses');
   return res;

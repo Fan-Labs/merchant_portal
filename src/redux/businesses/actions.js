@@ -5,9 +5,15 @@ const actions = {
   SET_PLACE_API_PHOTOS: 'SET_PLACE_API_PHOTOS',
   SAVE_BUSINESS: 'SAVE_BUSINESS',
   ADD_OR_UPDATE_BUSINESS: 'ADD_OR_UPDATE_BUSINESS',
+  FETCH_BUSINESS: 'FETCH_BUSINESS',
   
   fetchUserBusinesses: () => ({
     type: actions.FETCH_USER_BUSINESSES,
+  }),
+
+  fetchBusiness: (id) => ({
+    type: actions.FETCH_BUSINESS,
+    id,
   }),
 
   setBusinesses: (businesses) => ({

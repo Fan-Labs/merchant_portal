@@ -6,6 +6,7 @@ import appActions from '../app/actions'
 import actions from './actions'
 import {
   fetchBusinesses,
+  fetchBusiness,
   saveBusiness,
 } from '../../helpers/api'
 import { notification } from 'antd'
@@ -20,6 +21,23 @@ export function* fetchBusinessesWatcher() {
         const req = yield call(fetchBusinesses)
         
         yield put(actions.setBusinesses(req.data.data))
+        yield put(appActions.endAsync())
+        
+      } catch(error) {
+        yield handleError(error, fetch_business_error)
+      }
+
+  });
+}
+
+export function* fetchBusinessWatcher() {
+  yield takeEvery(actions.FETCH_BUSINESS, function*({id}) {
+        try {
+        yield put(appActions.startAsync())
+        debugger
+        const req = yield call(fetchBusiness, id)
+        debugger
+        yield put(actions.addOrUpdateBusiness(req.data))
         yield put(appActions.endAsync())
         
       } catch(error) {
@@ -95,6 +113,7 @@ const getAPIPlaceObject = state => state.Businesses.get('placesAPIResult')
 
 export default function* rootSaga() {
   yield all([
+    fork(fetchBusinessWatcher),
     fork(fetchBusinessesWatcher),
     fork(setFieldsFromGooglePlaces),
     fork(saveBusinessWatcher)
