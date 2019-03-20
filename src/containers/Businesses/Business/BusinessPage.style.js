@@ -7,7 +7,6 @@ const BusinessPageWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  height: 200px;
   box-sizing: border-box;
   
   @media only screen and (max-width: 767px) {

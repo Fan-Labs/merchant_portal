@@ -34,9 +34,7 @@ export function* fetchBusinessWatcher() {
   yield takeEvery(actions.FETCH_BUSINESS, function*({id}) {
         try {
         yield put(appActions.startAsync())
-        debugger
         const req = yield call(fetchBusiness, id)
-        debugger
         yield put(actions.addOrUpdateBusiness(req.data))
         yield put(appActions.endAsync())
         

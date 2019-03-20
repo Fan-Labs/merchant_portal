@@ -101,7 +101,7 @@ class Sidebar extends Component {
 
     const busMenus = businesses.map((biz,i) => 
                   <Menu.Item style={submenuStyle} key={`biz${i}`}>
-                    <Link style={submenuColor} to={`business/biz.id`}>
+                    <Link style={submenuColor} to={`${url}/business/${biz.id}`}>
                       {biz.name}
                     </Link>
                   </Menu.Item>

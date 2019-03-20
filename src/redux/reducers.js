@@ -3,6 +3,7 @@ import App from './app/reducer'
 import Messages from './messages/reducer'
 import Businesses from './businesses/reducer'
 import Teams from './teams/reducer'
+import Fixtures from './fixtures/reducer'
 import LanguageSwitcher from './languageSwitcher/reducer'
 import { reducer as formReducer } from 'redux-form'
 import { persistReducer } from 'redux-persist'
@@ -21,6 +22,7 @@ export default {
   App,
   Businesses,
   Teams,
+  Fixtures,
   Messages,
   LanguageSwitcher,
   form: persistedReducer,

@@ -4,6 +4,7 @@ import LayoutContentWrapper from '../../components/utility/layoutWrapper'
 import LayoutContent from '../../components/utility/layoutContent'
 import DashboardWrapper from './Dashboard.style'
 import BusinessCardList from '../Businesses/BusinessCardList'
+import TeamsList from '../Teams/TeamsList'
 import DashboardModel from '../../models/Dashboard/Dashboard'
 
 const Dashboard = ({ name, kycStatus, isNew }) => (
@@ -28,6 +29,8 @@ const Dashboard = ({ name, kycStatus, isNew }) => (
             </div>
           </div>
           <BusinessCardList />
+          <br/><br/><br/>
+          <TeamsList />
         </div>
       </DashboardWrapper>
     </LayoutContent>

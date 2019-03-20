@@ -4,21 +4,21 @@ import { handleError } from '../auth/saga'
 import appActions from '../app/actions'
 import actions from './actions'
 import {
-  fetchTeams,
-  fetchTeam,
+  fetchFixtures,
+  fetchBusinessFixtures
 } from '../../helpers/api'
 import { notification } from 'antd'
 
 
 const { fetch_business_error } = MESSAGE_KEYS
-export function* fetchTeamsWatcher() {
-  yield takeEvery(actions.FETCH_TEAMS, function*() {
+export function* fetchFixturesWatcher() {
+  yield takeEvery(actions.FETCH_FIXTURES, function*() {
 
         try {
         yield put(appActions.startAsync())
-        const req = yield call(fetchTeams)
+        const req = yield call(fetchFixtures)
         
-        yield put(actions.setTeams(req.data.data))
+        yield put(actions.setFixtures(req.data.data))
         yield put(appActions.endAsync())
         
       } catch(error) {
@@ -28,12 +28,13 @@ export function* fetchTeamsWatcher() {
   });
 }
 
-export function* fetchTeamWatcher() {
-  yield takeEvery(actions.FETCH_TEAM, function*({id}) {
+export function* fetchBusinessFixturesWatcher() {
+  yield takeEvery(actions.FETCH_BUSINESS_FIXTURES, function*({businessId}) {
         try {
         yield put(appActions.startAsync())
-        const req = yield call(fetchTeam, id)
-        yield put(actions.addOrUpdateTeam(req.data))
+        const req = yield call(fetchBusinessFixtures, businessId)
+        
+        yield put(actions.setBusinessFixtures(req.data.data))
         yield put(appActions.endAsync())
         
       } catch(error) {
@@ -42,13 +43,10 @@ export function* fetchTeamWatcher() {
 
   });
 }
-
-
-
 
 export default function* rootSaga() {
   yield all([
-    fork(fetchTeamsWatcher),
-    fork(fetchTeamWatcher),
+    fork(fetchFixturesWatcher),
+    fork(fetchBusinessFixturesWatcher)
   ]);
 }

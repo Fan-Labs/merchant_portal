@@ -1,13 +1,18 @@
 import React from 'react'
 import { Avatar } from 'antd'
+import TeamsModel from '../../models/Teams/Teams'
 import { importAll } from '../../helpers/utility'
-
-
 const logos = importAll(require.context('../../image/teams', false, /\.(png|jpe?g|svg)$/));
 
-const TeamLogo = ({name, size}) => {
+const TeamLogo = ({name, size, id, teams}) => {
+	let findName = name;
+
+	if(id && teams.length!==0) {
+		findName = teams.find((team) => team.id===id).name
+	}
+
 	let logo
-	switch(name) {
+	switch(findName) {
 		case 'Liverpool F.C':
 			logo = logos['Liverpool.svg']
 			break;
@@ -85,4 +90,4 @@ const TeamLogo = ({name, size}) => {
 
 }
 
-export default TeamLogo
+export default TeamsModel(TeamLogo)

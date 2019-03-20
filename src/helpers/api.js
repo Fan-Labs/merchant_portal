@@ -80,13 +80,23 @@ export function* updatePassword(oldPassword, newPassword, otp="") {
   return res;
 }
 
+export function* fetchFixtures() {
+  const res = yield makeAuthedRequest('GET', { }, 'fixtures');
+  return res;
+}
+
+export function* fetchBusinessFixtures(businessId) {
+  const res = yield makeAuthedRequest('GET', { }, `business-fixture?businessId=${businessId}`);
+  return res;
+}
+
+
 export function* fetchTeams() {
   const res = yield makeAuthedRequest('GET', { }, 'teams');
   return res;
 }
 
 export function* fetchTeam(id) {
-  debugger
   const res = yield makeAuthedRequest('GET', { }, `teams/${id}`);
   return res;
 }
@@ -97,7 +107,6 @@ export function* fetchBusinesses() {
 }
 
 export function* fetchBusiness(id) {
-  debugger
   const res = yield makeAuthedRequest('GET', { }, `businesses/${id}`);
   return res;
 }

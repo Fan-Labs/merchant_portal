@@ -4,18 +4,24 @@ import {bindActionCreators} from 'redux'
 import queryString from 'query-string'
 import appActions from '../../redux/app/actions'
 import businessActions from '../../redux/businesses/actions'
+import fixtureActions from '../../redux/fixtures/actions'
 
 const { fetchBusiness } = businessActions
+const { fetchFixtures, fetchBusinessFixtures } = fixtureActions
 
 function mapStateToProps(state, ownprops) {
   return {
     business: state.Businesses.get('businesses').find((business) => business.id === parseInt(ownprops.match.params.id)),
+    fixtures: state.Fixtures.get('fixtures'),
+    currentBusinessFixtures: state.Fixtures.get('currentBusinessFixtures')
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    fetchBusiness
+    fetchBusiness,
+    fetchFixtures,
+    fetchBusinessFixtures,
   }, dispatch);
 }
 
@@ -27,9 +33,15 @@ function createContainer(ComposedComponent) {
     }
 
     componentDidMount() {
-      const { business, fetchBusiness } = this.props;
+      const { business, fixtures, currentBusinessFixtures, fetchBusiness, fetchFixtures, fetchBusinessFixtures } = this.props;
       if(!business) {
         fetchBusiness(this.props.match.params.id)
+      }
+      if(fixtures.length === 0) {
+        fetchFixtures()
+      }
+      if(currentBusinessFixtures.length === 0 || currentBusinessFixtures[0].businessId !== this.props.match.params.id) {
+        fetchBusinessFixtures(this.props.match.params.id)
       }
     }
 
