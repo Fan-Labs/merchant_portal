@@ -90,6 +90,11 @@ export function* fetchBusinessFixtures(businessId) {
   return res;
 }
 
+export function* updateBusinessFixture(businessFixtureId, updatedFields) {
+  const res = yield makeAuthedRequest('PATCH', updatedFields, `business-fixture/${businessFixtureId}`);
+  return res;
+}
+
 
 export function* fetchTeams() {
   const res = yield makeAuthedRequest('GET', { }, 'teams');

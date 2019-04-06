@@ -2,18 +2,20 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import queryString from 'query-string'
-import appActions from '../../redux/app/actions'
+import UIActions from '../../redux/ui/actions'
 import businessActions from '../../redux/businesses/actions'
 import fixtureActions from '../../redux/fixtures/actions'
 
 const { fetchBusiness } = businessActions
+const { setDateDrawer } = UIActions
 const { fetchFixtures, fetchBusinessFixtures } = fixtureActions
 
 function mapStateToProps(state, ownprops) {
   return {
     business: state.Businesses.get('businesses').find((business) => business.id === parseInt(ownprops.match.params.id)),
     fixtures: state.Fixtures.get('fixtures'),
-    currentBusinessFixtures: state.Fixtures.get('currentBusinessFixtures')
+    currentBusinessFixtures: state.Fixtures.get('currentBusinessFixtures'),
+    isDateDrawerOpen: state.UI.get('isDateDrawerOpen')
   }
 }
 
@@ -22,6 +24,7 @@ function mapDispatchToProps(dispatch) {
     fetchBusiness,
     fetchFixtures,
     fetchBusinessFixtures,
+    setDateDrawer
   }, dispatch);
 }
 
@@ -49,6 +52,7 @@ function createContainer(ComposedComponent) {
       return (
         <ComposedComponent
           {...this.props}
+          {...this.state}
         />
       );
     }

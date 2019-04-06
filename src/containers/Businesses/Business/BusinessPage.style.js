@@ -29,6 +29,10 @@ const BusinessPageWrapper = styled.div`
     text-overflow: ellipses;
   }
 
+  .events {
+    font-size: 9px;
+  }
+
 
 `
 

@@ -2,29 +2,32 @@ import React, {Component} from 'react'
 import {Calendar, Badge} from 'antd'
 import TeamLogo from '../../../components/teamLogo'
 import moment from 'moment'
+import BusinessCalenderModel from '../../../models/Businesses/BusinessCalendar'
 
-function dateCellRender(dateValue, businessFixtures) {
-  const todayFixtures = businessFixtures.filter((businessFixture) => 
+function dateCellRender(dateValue, currentBusinessFixtures) {
+  const todayFixtures = currentBusinessFixtures.filter((businessFixture) => 
   	moment(businessFixture['fixture.startDateTime']).isSame(dateValue, 'day')
   )
-  console.log(todayFixtures)
+  //console.log(todayFixtures)
   return (
     <ul className="events">
       {
-        todayFixtures.map(item => (   
+        todayFixtures.map(item => (
+        <ui>   
             <span>
             	<Badge key={item.id} status={item.isActive? 'success': 'error'} />
             	<TeamLogo size="small" id={item['fixture.homeTeamId']} /> VS
             	<TeamLogo size="small" id={item['fixture.awayTeamId']} />
             </span>
+        </ui>
         ))
       }
     </ul>
   );
 }
 
-function monthCellRender(dateValue, businessFixtures) {
-  const monthFixtures = businessFixtures.filter((businessFixture) => 
+function monthCellRender(dateValue, currentBusinessFixtures) {
+  const monthFixtures = currentBusinessFixtures.filter((businessFixture) => 
   	moment(businessFixture['fixture.startDateTime']).isSame(dateValue, 'month')
   )
   return (
@@ -45,16 +48,12 @@ function monthCellRender(dateValue, businessFixtures) {
   );
 }
 
-
-const onPanelChange = (value, mode) => {
-	console.log(value, mode);
-}
-
-const BusinessCalendar = ({ fixtures, businessFixtures }) => (
+const BusinessCalendar = ({ currentBusinessFixtures, onDateSelect, onPanelChange }) => (
   <Calendar 
   	onPanelChange={onPanelChange}
-  	dateCellRender={(dateValue) => dateCellRender(dateValue, businessFixtures)}
-  	monthCellRender={(dateValue) => monthCellRender(dateValue, businessFixtures)}/>
+    onSelect={onDateSelect}
+  	dateCellRender={(dateValue) => dateCellRender(dateValue, currentBusinessFixtures? currentBusinessFixtures: [])}
+  	monthCellRender={(dateValue) => monthCellRender(dateValue, currentBusinessFixtures? currentBusinessFixtures: [])}/>
 )
 
-export default BusinessCalendar
+export default BusinessCalenderModel(BusinessCalendar)

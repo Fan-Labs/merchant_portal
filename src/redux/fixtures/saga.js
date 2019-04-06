@@ -5,7 +5,8 @@ import appActions from '../app/actions'
 import actions from './actions'
 import {
   fetchFixtures,
-  fetchBusinessFixtures
+  fetchBusinessFixtures,
+  updateBusinessFixture
 } from '../../helpers/api'
 import { notification } from 'antd'
 
@@ -44,9 +45,29 @@ export function* fetchBusinessFixturesWatcher() {
   });
 }
 
+export function* updateBusinessFixturesWatcher() {
+  yield takeEvery(actions.UPDATE_BUSINESS_FIXTURE, function*({businessFixtureId, updatedFields}) {
+        try {
+        yield put(appActions.startAsync())
+        const req = yield call(updateBusinessFixture, businessFixtureId, updatedFields)
+        notification.info({
+          message: 'Fixture Updated',
+          placement: 'topRight'
+        });
+        yield put(actions.addOrUpdateBusinessFixture(req.data))
+        yield put(appActions.endAsync())
+        
+      } catch(error) {
+        yield handleError(error, fetch_business_error)
+      }
+
+  });
+}
+
 export default function* rootSaga() {
   yield all([
     fork(fetchFixturesWatcher),
-    fork(fetchBusinessFixturesWatcher)
+    fork(fetchBusinessFixturesWatcher),
+    fork(updateBusinessFixturesWatcher)
   ]);
 }

@@ -5,6 +5,7 @@ import Businesses from './businesses/reducer'
 import Teams from './teams/reducer'
 import Fixtures from './fixtures/reducer'
 import LanguageSwitcher from './languageSwitcher/reducer'
+import UI from './ui/reducer'
 import { reducer as formReducer } from 'redux-form'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' 
@@ -23,6 +24,7 @@ export default {
   Businesses,
   Teams,
   Fixtures,
+  UI,
   Messages,
   LanguageSwitcher,
   form: persistedReducer,
