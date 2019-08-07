@@ -2,7 +2,6 @@ import request from 'axios'
 //import ReactGA from 'react-ga'
 import jwt_decode from 'jwt-decode'
 import moment from 'moment'
-import fomoClient from '../config/useFomo'
 
 export function clearToken() {
   localStorage.removeItem('id_token');
@@ -36,12 +35,6 @@ export function importAll(requireContext) {
   return images;
 }
 
-export function setRates(rates) {
-  localStorage.setItem('fund_rates', JSON.stringify(rates))
-}
-export function getRates() {
-  return JSON.parse(localStorage.getItem('fund_rates'))
-}
 
 export function setUser(user) {
   localStorage.setItem('user_details', JSON.stringify(user))
@@ -98,36 +91,6 @@ export function tryParseJSON (jsonString){
 
 export function filterSpecialCharacters(string) {
   return string.replace(/[`~$%^&*()|=?;:'"<>{}[\]\\/]/gi, "")
-}
-
-export function pageView() {
-  //ReactGA.pageview(window.location.pathname + window.location.search)
-}
-
-export function captureEvent(category, action, label) {
-  // ReactGA.event({
-  //   category,
-  //   action,
-  //   label
-  // });
-}
-
-
-export function isChecksumAddress(address) {
-    // Check each case
-
-};
-
-export function getRandomArbitrary(min, max) {
-  return 5502173.3535*2
-  //return Math.random() * (max - min) + min
-  // const rand = localStorage.getItem('rand_fund_val')
-  // if(rand) {
-  //   return parseFloat(rand)
-  // } else {
-  //   localStorage.setItem('rand_fund_val', Math.random() * (max - min) + min)
-  //   return parseFloat(localStorage.getItem('rand_fund_val'))
-  // }
 }
 
 

@@ -4,6 +4,7 @@ import messageSagas from './messages/saga'
 import businessSagas from './businesses/saga'
 import teamsSagas from './teams/saga'
 import fixturesSagas from './fixtures/saga'
+import offersSagas from './offers/saga'
 import appSagas from './app/saga'
 
 export default function* rootSaga(getState) {
@@ -13,6 +14,7 @@ export default function* rootSaga(getState) {
     businessSagas(),
     teamsSagas(),
     fixturesSagas(),
+    offersSagas(),
     appSagas()
   ]);
 }

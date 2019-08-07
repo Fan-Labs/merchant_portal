@@ -3,7 +3,7 @@ import { palette } from 'styled-theme'
 import { transition, borderRadius } from '../../config/style-util'
 import WithDirection from '../../config/withDirection'
 import telegramIcon from '../../image/telegram-icon.svg'
-import companyLogo from '../../image/Gamedex_Lockup_Black.svg'
+//import companyLogo from '../../image/Gamedex_Lockup_Black.svg'
 
 const SidebarWrapper = styled.div`
   .isomorphicSidebar {

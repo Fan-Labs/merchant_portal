@@ -23,6 +23,31 @@ const InputSearch = WithDirection(WDInputSearch);
 const WDTextarea = TextAreaWrapper(TextArea);
 const Textarea = WithDirection(WDTextarea);
 
+class TextAreaInput extends Component {
+  constructor(props) {
+    super(props)
+    this.onChange = this.onChange.bind(this)
+  }
+
+  onChange(event) {
+    const { input } = this.props
+    let replaced
+    if(this.props.type==="password") {
+      replaced = event.target.value
+    } else {
+      replaced = filterSpecialCharacters(event.target.value)
+    }
+    input.onChange(replaced)
+  }
+
+  render() {
+    const { input, meta: { error }, ...custom } = this.props
+    return (
+      <Textarea {...input} onChange={this.onChange} {...custom} />
+    )
+  }
+}
+
 class FormInput extends Component {
   constructor(props) {
     super(props)
@@ -88,7 +113,7 @@ class DefaultInput extends Component {
 
 
 export default DefaultInput;
-export { InputSearch, InputGroup, Textarea,  FormInput as formInput };
+export { InputSearch, InputGroup, Textarea, TextAreaInput, FormInput as formInput };
 
 
 

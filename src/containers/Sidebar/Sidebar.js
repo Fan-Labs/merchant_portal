@@ -142,7 +142,7 @@ class Sidebar extends Component {
                 key="hyperion"
                 title={
                   <span className="isoMenuHolder" style={submenuColor}>
-                    <i className="icon-gamedex-icon" />
+                    <i className="ion-android-restaurant" />
                     <span className="nav-text">
                       <IntlMessages id="sidebar.businesses" />
                     </span>
@@ -157,7 +157,14 @@ class Sidebar extends Component {
                   </Link>
                 </Menu.Item>
               </SubMenu>
-
+              <Menu.Item  key="offers">
+                <Link style={submenuColor} to={`${url}/offers`}>
+                  <span className="isoMenuHolder" style={submenuColor}>
+                    <i className="ion-beer" />
+                      Offers
+                  </span>
+                </Link>
+              </Menu.Item>
 
               <Menu.Item  key="settings">
                 <Link style={submenuColor} to={`${url}/settings`}>
@@ -173,24 +180,7 @@ class Sidebar extends Component {
                 <a style={submenuColor} href="https://docs.gamedex.co/" target="_blank" rel="noopener noreferrer">
                   <span className="isoMenuHolder" style={submenuColor}>
                     <i className="ion-help-circled" />
-                      <IntlMessages id="sidebar.help" />
-                  </span>
-                </a>
-              </Menu.Item>
-              <Menu.Item  key="discord">
-                <a style={submenuColor} href="http://t.me/officialgamedex" target="_blank" rel="noopener noreferrer">
-                  <span className="isoMenuHolder" style={submenuColor}>
-                    <i className="icon-telegram-icon" />
-                      <IntlMessages id="discord.title" />
-                  </span>
-                </a>
-              </Menu.Item>
-
-              <Menu.Item  key="legal">
-                <a style={submenuColor} href="https://www.gamedex.co/" target="_blank" rel="noopener noreferrer">
-                  <span className="isoMenuHolder" style={submenuColor}>
-                    <i className="ion-ios-compose" />
-                      <IntlMessages id="legal.title" />
+                      Contact Us
                   </span>
                 </a>
               </Menu.Item>

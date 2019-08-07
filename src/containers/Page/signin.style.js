@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { palette } from 'styled-theme';
 import WithDirection from '../../config/withDirection';
-import companyLogo from '../../image/Gamedex_Lockup_Black.svg'
 
 const SignInStyleWrapper = styled.div`
   width: 100%;
@@ -73,7 +72,6 @@ const SignInStyleWrapper = styled.div`
     }
 
     .logo {
-      background: url(${companyLogo}) no-repeat center center;
       background-size: contain;
       width: 100%;
       height: 35px;

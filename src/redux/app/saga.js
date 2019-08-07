@@ -1,5 +1,5 @@
 import { all, takeEvery, put, fork, select } from 'redux-saga/effects'
-import { pageView } from '../../helpers/utility'
+// import { pageView } from '../../helpers/utility'
 import { MESSAGE_KEYS } from '../../constants'
 import { handleError } from '../auth/saga'
 import actions from './actions'
@@ -33,7 +33,7 @@ export function* repeatOTPRequestWatcher() {
 
 export function* logPageView() {
   yield takeEvery("@@router/LOCATION_CHANGE", function*() {
-    yield pageView()
+    // yield pageView()
   });
 }
 

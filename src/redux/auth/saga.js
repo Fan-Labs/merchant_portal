@@ -6,8 +6,6 @@ import actions from './actions'
 import appActions from '../app/actions'
 import businessActions from '../businesses/actions'
 import messageActions from '../messages/actions'
-import { captureEvent } from '../../helpers/utility'
-import { signupFomoEvent } from '../../helpers/utility';
 import {
   login,
   c20validate,
@@ -242,22 +240,6 @@ export function* getOTPSMSWatcher() {
   });
 }
 
-export function* getOTPCallWatcher() {
-  yield takeEvery(actions.GET_OTP_CALL, function*({number}) {
-    if (fakeApiCall) {
-
-
-    } else {
-      try {
-        yield put(appActions.startAsync())
-        //yield call(getOTPCall, number)
-        yield put(appActions.endAsync())
-      } catch(error) {
-          yield handleError(error, get_otp_fail)
-      }
-    }
-  });
-}
 
 const { otp_success, otp_fail } = MESSAGE_KEYS
 export function* verifyPhoneWatcher() {
@@ -284,178 +266,7 @@ export function* verifyPhoneWatcher() {
   });
 }
 
-const { get_qr_fail } = MESSAGE_KEYS
-export function* getQRWatcher() {
-  yield takeEvery(actions.GET_2FA_QR, function*() {
-    if (fakeApiCall) {
 
-
-    } else {
-      try {
-        yield put(appActions.startAsync())
-        const req = yield call(get2FACode)
-        yield put(actions.set2FACode(req.data.provisioning_uri))
-        yield put(appActions.endAsync())
-      } catch(error) {
-         yield handleError(error, get_qr_fail)
-      }
-    }
-  });
-}
-
-const { submit_otp_error } = MESSAGE_KEYS
-export function* submitOTPWatcher() {
-  yield takeEvery(actions.SUBMIT_OTP, function*({ code, onSuccess, onFail }) {
-    if (fakeApiCall) {
-
-
-    }
-    else {
-      try {
-        yield put(appActions.startAsync())
-        yield call(submitOTP, code)
-        const user = getUser();
-        if (user) {
-          user.two_factor = true;
-          yield put(actions.updateUser(user))
-        }
-        yield call(onSuccess)
-        yield put(appActions.endAsync())
-      }
-      catch(error) {
-        yield handleError(error, submit_otp_error)
-        yield call(onFail)
-      }
-    }
-  });
-}
-
-const { disable_2fa_error } = MESSAGE_KEYS
-export function* disable2FAWatcher() {
-  yield takeEvery(actions.DISABLE_OTP, function*({ password }) {
-    if (fakeApiCall) {
-
-
-    }
-    else {
-      try {
-        yield put(appActions.startAsync())
-        yield call(disable2FA, password)
-        const user = getUser();
-        if (user) {
-          yield put(actions.updateUser(user))
-        }
-        yield put(appActions.endAsync())
-      }
-      catch(error) {
-        yield handleError(error, disable_2fa_error)
-      }
-    }
-  });
-}
-
-
-const { check_kyc_error } = MESSAGE_KEYS
-export function* checkKYCWatcher() {
-  yield takeEvery(actions.CHECK_KYC_STATUS, function*({ values }) {
-    if (fakeApiCall) {
-
-
-    }
-    else {
-      try {
-        yield put(appActions.startAsync())
-
-    
-        const user = getUser();
-        if (user) {
-          yield put(actions.updateUser(user))
-        }
-        yield put(appActions.endAsync())
-      }
-      catch(error) {
-        yield handleError(error, check_kyc_error)
-      }
-    }
-  });
-}
-
-export function* fetchAMLDocWatcher() {
-  yield takeEvery(actions.FETCH_AML_DOC_LIST, function*({documentType}) {
-    if (fakeApiCall) {
-
-
-    }
-    else {
-      try {
-        yield put(appActions.startAsync())
-        // const req = yield call(fetchAMLDocList, documentType)
-        // yield put(actions.setAMLDocList(req.data.documents))
-        yield put(appActions.endAsync())
-      }
-      catch(error) {
-        yield handleError(error, check_kyc_error)
-      }
-    }
-  });
-}
-
-export function* uploadAMLDocWatcher() {
-  yield takeEvery(actions.UPLOAD_DOCUMENTS, function*({documents, documentType}) {
-    if (fakeApiCall) {
-
-
-    }
-    else {
-      try {
-        yield put(appActions.startAsync())
-
-        
-        for(var i=0 ; i<documents.length ; i++){
-          
-          yield call(uploadDocument, documents[i], documentType)
-        }
-
-        yield put(actions.fetchAMLDocList(documentType))
-        yield put(appActions.endAsync())
-      }
-      catch(error) {
-        yield handleError(error, check_kyc_error)
-      }
-    }
-  });
-}
-
-export function* requestJumioTokenWatcher() {
-  yield takeEvery(actions.REQUEST_JUMIO_TOKEN, function*() {
-    
-    
-  });
-}
-
-const { refresh_token_error } = MESSAGE_KEYS
-export function* refreshTokenWatcher() {
-  yield takeEvery(actions.REFRESH_AUTH_TOKEN, function*() {
-    // if (fakeApiCall) {
-
-
-    // }
-    // else {
-    //   try {
-    //     yield put(appActions.startAsync())
-    //     yield put(actions.refreshTokenAndUser())
-    //     const user = getUser();
-    //     if (user) {
-    //       yield put(actions.updateUser(user))
-    //     }
-    //     yield put(appActions.endAsync())
-    //   }
-    //   catch(error) {
-    //     yield handleError(error, refresh_token_error)
-    //   }
-    // }
-  });
-}
 
 const { id_verify_error } = MESSAGE_KEYS
 export function* idVerifySuccessWatcher() {
@@ -464,54 +275,6 @@ export function* idVerifySuccessWatcher() {
   });
 }
 
-const { backup_otp_error, backup_otp_success } = MESSAGE_KEYS
-export function* backupOTPSMSWatcher() {
-  yield takeEvery(actions.GET_BACKUP_OTP_SMS, function*({ email, password }) {
-    // if (fakeApiCall) {
-
-
-    // }
-    // else {
-    //   try {
-    //     yield put(appActions.startAsync())
-    //     yield call(getBackupOTPSMS, email, password)
-    //     const user = getUser();
-    //     if (user) {
-    //       yield put(actions.updateUser(user))
-    //     }
-    //     yield put(messageActions.setMessage(backup_otp_success, backup_otp_success))
-    //     yield put(appActions.endAsync())
-    //   }
-    //   catch(error) {
-    //     yield handleError(error, backup_otp_error)
-    //   }
-    // }
-  });
-}
-
-export function* backupOTPCallWatcher() {
-  yield takeEvery(actions.GET_BACKUP_OTP_CALL, function*({ email, password }) {
-    // if (fakeApiCall) {
-
-
-    // }
-    // else {
-    //   try {
-    //     yield put(appActions.startAsync())
-    //     yield call(getBackupOTPCall, email, password)
-    //     const user = getUser();
-    //     if (user) {
-    //       yield put(actions.updateUser(user))
-    //     }
-    //     yield put(messageActions.setMessage(backup_otp_success, backup_otp_success))
-    //     yield put(appActions.endAsync())
-    //   }
-    //   catch(error) {
-    //     yield handleError(error, backup_otp_error)
-    //   }
-    // }
-  });
-}
 
 //HANDLE ERROR TRIGGERS OTP MODAL IF SERVER REQUIRES IT
 
@@ -553,16 +316,7 @@ export default function* rootSaga() {
     fork(signupRequest),
     fork(verifyMailWatcher),
     fork(updateUserWatcher),
-    fork(getOTPSMSWatcher),
-    fork(getOTPCallWatcher),
     fork(verifyPhoneWatcher),
-    fork(getQRWatcher),
-    fork(submitOTPWatcher),
-    fork(disable2FAWatcher),
-    fork(refreshTokenWatcher),
-    fork(updatePasswordWatcher),
-    fork(backupOTPSMSWatcher),
-    fork(backupOTPCallWatcher),
-    fork(refreshToken)
+    fork(updatePasswordWatcher)
   ]);
 }

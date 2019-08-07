@@ -5,7 +5,6 @@ import { AppLocale } from './dashApp'
 import { LocaleProvider } from 'antd';
 import { IntlProvider } from 'react-intl';
 import { connect } from 'react-redux';
-import OTPModal from './containers/App/OTPModal'
 import { isLoggedIn } from './helpers/utility'
 
 import App from './containers/App/App';
@@ -48,7 +47,6 @@ const PublicRoutes = ({ history, isLoggedIn, locale }) => (
     >
       <ConnectedRouter history={history}>
         <div>
-          <OTPModal />
           <SignedinRoute
             exact
             isLoggedIn={isLoggedIn}
@@ -87,12 +85,6 @@ const PublicRoutes = ({ history, isLoggedIn, locale }) => (
           <RestrictedRoute
             path="/app"
             component={App}
-            isLoggedIn={isLoggedIn}
-          />
-          <RestrictedRoute
-            path="/kyc_verify"
-            component={asyncComponent(() =>
-              import('./containers/KYC/VerifyRedirect'))}
             isLoggedIn={isLoggedIn}
           />
         </div>

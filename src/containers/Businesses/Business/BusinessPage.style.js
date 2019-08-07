@@ -8,6 +8,11 @@ const BusinessPageWrapper = styled.div`
   align-items: center;
   text-align: center;
   box-sizing: border-box;
+
+  .business-name {
+    font-size: 18px;
+    font-weight: bold;
+  }
   
   @media only screen and (max-width: 767px) {
     flex-direction: column;

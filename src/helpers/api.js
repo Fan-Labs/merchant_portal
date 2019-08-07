@@ -96,6 +96,11 @@ export function* updateBusinessFixture(businessFixtureId, updatedFields) {
 }
 
 
+export function* fetchOffers() {
+  const res = yield makeAuthedRequest('GET', { }, 'offers');
+  return res;
+}
+
 export function* fetchTeams() {
   const res = yield makeAuthedRequest('GET', { }, 'teams');
   return res;
@@ -174,6 +179,16 @@ export function* uploadDocument(file, documentType) {
   //const res = yield makeAuthedRequest('DELETE', {docID}, `v2/accounts/aml_documents`)
 
   return res
+}
+
+export function* getPlaceDetails(placeId) {
+ //  const request = {
+ //    placeId
+ //  };
+ // // const service = new google.maps.places.PlacesService();
+ // const res = yield request({ url: `https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyATJ3hSZzqyf0ChS6MN89Dnj_wYv9rnflw&placeid=${placeId}`, method: 'get'});
+  debugger
+  return 'res'
 }
 
 //HELPERS

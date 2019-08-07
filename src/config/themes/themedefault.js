@@ -2,7 +2,7 @@ const theme = {};
 
 theme.palette = {
   primary: [
-    '#FB4564', // 0: Default
+    '#1890ff8c', // 0: Default
     'rgba(251,69,100,0.75)'
   ],
   secondary: [

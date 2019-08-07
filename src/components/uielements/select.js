@@ -16,7 +16,7 @@ class formSelect extends Component {
       <IsoSelect {...input}>
         {data.map((item, i) =>
           <SelectOption value={item.value}>
-            <IntlMessages id={item.key} />
+            {item.label}
           </SelectOption>
         )}
       </IsoSelect>

@@ -4,7 +4,6 @@ import { reduxForm, Field } from 'redux-form'
 import IntlMessages from '../../components/utility/intlMessages'
 import { formInput } from '../../components/uielements/input'
 import Button from '../../components/uielements/button'
-import { required } from '../KYC/validate'
 import GeoSuggestInput from '../../components/geoSuggestInput/geoSuggest'
 
 
