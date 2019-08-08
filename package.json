@@ -3,7 +3,7 @@
   "version": "2.5.0",
   "private": true,
   "dependencies": {
-    "antd": "^3.13.2",
+    "antd": "^3.18.2",
     "antd-local-icon": "^0.1.3",
     "art": "^0.10.2",
     "axios": "^0.18.0",
